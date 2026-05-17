@@ -1,0 +1,56 @@
+# Added by code-review-graph
+.code-review-graph/
+
+# AI Agent Config (exclude from backup)
+.claude/
+.kiro/
+.sisyphus/
+.cursorrules
+.windsurfrules
+.opencode.json
+.mcp.json
+
+# Linter cache
+.ruff_cache/
+
+# Directories
+data/raw_pdfs/
+data/chroma_db/
+data/__pycache__/
+
+# Byte-compiled
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Environment
+.env
+
+# Test/coverage
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# Type checking
+.mypy_cache/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Wiki generated output
+wiki_site/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

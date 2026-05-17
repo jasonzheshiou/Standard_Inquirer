@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Gap Analyser — Wiki</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6; color: #333; background: #f5f5f5;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white; padding: 40px 20px; text-align: center;
+        }
+        .header h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .toc {
+            background: white; padding: 30px; margin: 20px 0; border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .toc h2 { color: #1e3a5f; margin-bottom: 15px; border-bottom: 2px solid #2563eb; padding-bottom: 5px; }
+        .toc ul { list-style: none; }
+        .toc li { margin: 8px 0; }
+        .toc a { color: #2563eb; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .section {
+            background: white; padding: 30px; margin: 20px 0; border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section h2 { color: #1e3a5f; margin-bottom: 20px; border-left: 4px solid #2563eb; padding-left: 15px; }
+        .section h3 { color: #2563eb; margin: 20px 0 10px 0; }
+        .section p { margin: 10px 0; }
+        .section ul { margin: 10px 0 10px 20px; }
+        .section li { margin: 5px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #e1e4e8; padding: 10px; text-align: left; }
+        th { background: #f0f4f8; font-weight: 600; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .code { background: #f6f8fa; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 10px 0; }
+        .code code { font-family: 'Courier New', monospace; font-size: 0.9em; }
+        .note {
+            background: #fff3cd; border-left: 4px solid #ffc107;
+            padding: 15px; margin: 15px 0; border-radius: 5px;
+        }
+        .warning {
+            background: #f8d7da; border-left: 4px solid #dc3545;
+            padding: 15px; margin: 15px 0; border-radius: 5px;
+        }
+        .footer {
+            text-align: center; padding: 20px; color: #5a6d82;
+            border-top: 1px solid #e1e4e8; margin-top: 40px;
+        }
+        .badge {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.85em; font-weight: 600;
+        }
+        .badge-high { background: #fee2e2; color: #dc2626; }
+        .badge-medium { background: #fef3c7; color: #d97706; }
+        .badge-low { background: #d1fae5; color: #059669; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛡️ Compliance Gap Analyser</h1>
+        <p>Australian Life Insurance Model Governance Gap Analysis</p>
+        <p>Generated: 2026-05-14 09:04:39</p>
+    </div>
+
+    <div class="container">
+        <div class="toc">
+            <h2>Quick Links</h2>
+            <ul>
+                <li><a href="#compliance-registry">Compliance Registry</a></li>
+                <li><a href="#implemented-rules">Implemented Rules</a></li>
+                <li><a href="#getting-started">Getting Started</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#api">API Reference</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="compliance-registry">
+            <h2>Compliance Registry</h2>
+            <p><strong>Status Legend:</strong> ✅ Implemented &middot; 🔲 Planned</p>
+            <table>
+                <tr>
+                    <th>Standard</th><th>Category</th><th>Status</th>
+                    <th>Rules</th><th>Questions</th><th>Source</th>
+                </tr>
+                <tr><td><strong>APRA CPS 230</strong></td><td>Operational Risk</td><td>✅ Implemented</td><td>8</td><td>8</td><td><a href="https://www.apra.gov.au/prudential-standards/cps-230">Link</a></td></tr>
+<tr><td><strong>APRA CPS 220</strong></td><td>Risk Management</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><strong>APRA CPS 510</strong></td><td>Governance</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><strong>APRA LPS 110</strong></td><td>Capital Adequacy</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><strong>APRA LPS 220</strong></td><td>Risk Management (Life)</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><strong>AI PS 200</strong></td><td>Life Insurance Valuation</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><strong>AI PS 300</strong></td><td>Actuarial Reporting</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td><strong>AI PS 400</strong></td><td>Model Governance</td><td>🔲 Planned</td><td>—</td><td>—</td><td>—</td></tr>
+
+            </table>
+        </div>
+
+        <div class="section" id="implemented-rules">
+            <h2>Implemented: APRA CPS 230 — Gap Rules</h2>
+            <p>The following <strong>8 gap rules</strong> are currently implemented for CPS 230:</p>
+            <table>
+                <tr>
+                    <th>Rule ID</th><th>Clause</th><th>Category</th><th>Severity</th>
+                </tr>
+                <tr><td><code>CPS230-6</code></td><td>Paragraph 6</td><td>Board Oversight</td><td>🔴 High</td></tr>
+<tr><td><code>CPS230-27b</code></td><td>Paragraph 27(b)</td><td>Board Oversight</td><td>🔴 High</td></tr>
+<tr><td><code>CPS230-22</code></td><td>Paragraph 22</td><td>Model Validation</td><td>🔴 High</td></tr>
+<tr><td><code>CPS230-30</code></td><td>Paragraph 30</td><td>Risk Escalation</td><td>🔴 High</td></tr>
+<tr><td><code>CPS230-21</code></td><td>Paragraph 21</td><td>Model Inventory</td><td>🟡 Medium</td></tr>
+<tr><td><code>CPS230-27</code></td><td>Paragraph 27</td><td>Data Governance</td><td>🟡 Medium</td></tr>
+<tr><td><code>CPS230-28</code></td><td>Paragraph 28</td><td>Documentation</td><td>🟡 Medium</td></tr>
+<tr><td><code>CPS230-29</code></td><td>Paragraph 29</td><td>Risk Management</td><td>🟡 Medium</td></tr>
+
+            </table>
+        </div>
+
+        <div class="section" id="getting-started">
+            <h2>Getting Started</h2>
+            <h3>Installation</h3>
+            <div class="code"><code>pip install -e ".[dev]"</code></div>
+            <h3>Running the App</h3>
+            <div class="code"><code>streamlit run app.py</code></div>
+            <h3>Running the Ingestion Pipeline</h3>
+            <div class="code"><code>python -m scripts.run_ingestion</code></div>
+            <h3>Generating This Wiki</h3>
+            <div class="code"><code>python build_wiki.py --both</code><br><code>mkdocs build</code></div>
+        </div>
+
+        <div class="section" id="architecture">
+            <h2>Architecture</h2>
+            <p>The system consists of four main components:</p>
+            <ol>
+                <li><strong>Streamlit UI</strong> — Multi-page interface (Home, Questionnaire, Report, Admin)</li>
+                <li><strong>Gap Analysis Engine</strong> — Deterministic rule evaluation from JSON rules</li>
+                <li><strong>Vector Knowledge Base</strong> — ChromaDB with embedded standards chunks</li>
+                <li><strong>Standards Ingestion Pipeline</strong> — Download, parse, chunk, embed PDFs</li>
+            </ol>
+        </div>
+
+        <div class="section" id="api">
+            <h2>API Reference</h2>
+            <h3>Engine Package</h3>
+            <table>
+                <tr><th>Module</th><th>Key Functions</th></tr>
+                <tr><td><code>engine.gap_analyzer</code></td><td><code>analyze()</code>, <code>evaluate_rule()</code>, <code>load_gap_rules()</code></td></tr>
+                <tr><td><code>engine.questionnaire</code></td><td><code>load_questionnaire()</code>, <code>get_all_questions()</code>, <code>get_sections()</code></td></tr>
+                <tr><td><code>engine.schemas</code></td><td><code>GapRule</code>, <code>Question</code>, <code>GapFinding</code>, <code>Questionnaire</code></td></tr>
+            </table>
+            <h3>Ingestion Pipeline</h3>
+            <table>
+                <tr><th>Module</th><th>Key Functions</th></tr>
+                <tr><td><code>standards_ingestion.downloader</code></td><td><code>download_source()</code></td></tr>
+                <tr><td><code>standards_ingestion.parser</code></td><td><code>extract_text_from_pdf()</code>, <code>chunk_text()</code></td></tr>
+                <tr><td><code>standards_ingestion.embedder</code></td><td><code>init_chroma_client()</code>, <code>upsert_documents()</code></td></tr>
+            </table>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Disclaimer:</strong> This tool provides <strong>sample guidance only</strong>. All rules, mitigations, and gap conditions must be reviewed by a <strong>qualified actuary</strong> before being relied upon for regulatory compliance.
+        </div>
+
+        <div class="footer">
+            <p>Compliance Gap Analyser — Wiki</p>
+            <p>Generated: 2026-05-14 09:04:39</p>
+        </div>
+    </div>
+</body>
+</html>

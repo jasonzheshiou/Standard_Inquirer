@@ -1,0 +1,125 @@
+{
+  "standards_version": "2025-04-01",
+  "requirements": [
+    {
+      "id": "CPS230-27b",
+      "standard": "CPS 230",
+      "clause": "Paragraph 27(b)",
+      "description": "The Board must approve a documented risk appetite statement that covers model risk.",
+      "category": "Board Oversight",
+      "gap_condition": {
+        "question_id": "q_risk_appetite",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "high",
+      "mitigation": "Draft a Board risk appetite statement aligned with CPS 230. Conduct a special board meeting to approve it and record in minutes.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-6",
+      "standard": "CPS 230",
+      "clause": "Paragraph 6",
+      "description": "The Board must establish a documented model risk governance framework.",
+      "category": "Board Oversight",
+      "gap_condition": {
+        "question_id": "q_risk_governance",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "high",
+      "mitigation": "Establish a formal model risk governance framework approved by the Board, defining roles, responsibilities, and escalation paths.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-21",
+      "standard": "CPS 230",
+      "clause": "Paragraph 21",
+      "description": "The organisation must maintain a comprehensive inventory of all models in use.",
+      "category": "Model Inventory",
+      "gap_condition": {
+        "question_id": "q_model_inventory",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "medium",
+      "mitigation": "Create and maintain a centralised model inventory listing all models, their purpose, owners, and risk classifications.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-22",
+      "standard": "CPS 230",
+      "clause": "Paragraph 22",
+      "description": "Models must be independently validated before deployment and at least annually thereafter.",
+      "category": "Model Validation",
+      "gap_condition": {
+        "question_id": "q_model_validation",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "high",
+      "mitigation": "Implement an independent model validation process with dedicated validation team, documented methodology, and annual review schedule.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-27",
+      "standard": "CPS 230",
+      "clause": "Paragraph 27",
+      "description": "The organisation must have a documented data governance framework covering model inputs and outputs.",
+      "category": "Data Governance",
+      "gap_condition": {
+        "question_id": "q_data_governance",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "medium",
+      "mitigation": "Develop a data governance framework that covers data quality, lineage, and access controls for all model inputs and outputs.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-28",
+      "standard": "CPS 230",
+      "clause": "Paragraph 28",
+      "description": "Model documentation must meet standards including assumptions, limitations, and methodology.",
+      "category": "Documentation",
+      "gap_condition": {
+        "question_id": "q_documentation",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "medium",
+      "mitigation": "Create comprehensive model documentation covering assumptions, limitations, methodology, data sources, and validation results.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-30",
+      "standard": "CPS 230",
+      "clause": "Paragraph 30",
+      "description": "There must be a documented process for escalating model-related issues to the Board.",
+      "category": "Risk Escalation",
+      "gap_condition": {
+        "question_id": "q_escalation",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "high",
+      "mitigation": "Establish a formal escalation process with clear triggers, timelines, and reporting lines to the Board for model issues.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    },
+    {
+      "id": "CPS230-29",
+      "standard": "CPS 230",
+      "clause": "Paragraph 29",
+      "description": "The risk framework must address concentration risk in model inputs and outputs.",
+      "category": "Risk Management",
+      "gap_condition": {
+        "question_id": "q_concentration_risk",
+        "logic": "contains_noncompliance",
+        "value": ""
+      },
+      "severity_if_gap": "medium",
+      "mitigation": "Conduct a concentration risk assessment identifying dependencies on single data sources, models, or methodologies.",
+      "reference_url": "https://www.apra.gov.au/prudential-standards/cps-230"
+    }
+  ]
+}

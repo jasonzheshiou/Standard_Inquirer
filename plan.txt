@@ -1,0 +1,19 @@
+## ⚠️ In Development — Expect Bugs & Inconsistencies
+
+**This project is actively under development.** You may encounter:
+- Bugs, inconsistent methodologies, or incomplete features
+- Breaking changes between versions
+- Statistical methods that are still being refined
+
+**This is intentional** — the project is a showcase of what can be built using local LLMs.
+
+---
+
+## 🤖 AI-Generated Project Showcase
+
+**This entire application was developed using the local LLM `Qwen3.6-35B-A3B`.**
+
+The purpose of this project is to demonstrate that a **full-featured Life Insurance Actuarial Application** can be built using:
+- **Local LLM**: Qwen3.6-35B-A3B (no API keys, no cloud dependency)
+- **Open-source tools**: Streamlit, Plotly, pandas, pytest
+- **Iterative AI-assisted development**: Code generation, debugging, refactoring, and documentation were all handled by the LLM

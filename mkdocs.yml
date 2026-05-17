@@ -1,0 +1,55 @@
+site_name: "Compliance Gap Analyser — Wiki"
+docs_dir: wiki_build
+site_dir: wiki_site
+use_directory_urls: false
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    toggle:
+      icon: material/toggle-switch
+      name: Switch theme
+  logo: material/shield-check
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Guides:
+    - Getting Started: guides/getting_started.md
+    - Compliance Registry: guides/compliance_registry.md
+    - Architecture: guides/architecture.md
+  - Engine:
+    - Overview: engine/overview.md
+    - Schemas: engine/schemas.md
+    - Gap Analyzer: engine/gap_analyzer.md
+    - Questionnaire: engine/questionnaire.md
+  - Ingestion:
+    - Overview: ingestion/overview.md
+    - Downloader: ingestion/downloader.md
+    - Parser: ingestion/parser.md
+    - Embedder: ingestion/embedder.md
+  - UI:
+    - Overview: ui/overview.md
+    - Home: ui/home.md
+    - Questionnaire: ui/questionnaire.md
+    - Report: ui/report.md
+    - Admin: ui/admin.md
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - tables
+  - fenced_code
+  - codehilite:
+      guess_lang: false
+
+extra:
+  generator: false
+  version:
+    provider: mike

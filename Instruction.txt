@@ -1,0 +1,427 @@
+Master Instruction for LLM: Build the Compliance Gap Analyser
+You are an expert full‑stack developer, actuary, and DevOps engineer. Your task is to create a Streamlit application for Australian life insurance model governance gap analysis. The app must:
+
+Pose a structured questionnaire to the user about their model governance lifecycle.
+
+Map answers to specific clauses/requirements from APRA prudential standards (CPS 230, CPS 220, CPS 510, LAGIC standards like LPS 110, LPS 220, etc.) and Actuaries Institute Professional Standards (e.g., PS 200, PS 300 series, life insurance valuation standards).
+
+Identify compliance gaps and generate a gap report with severity, evidence of standard, and concrete mitigation actions.
+
+Be fully extensible: later we will attach a REST API and an LLM (e.g., via LangChain) that can auto‑analyse a company’s documents and answer the same questionnaire.
+
+Crucially, the system must automatically fetch and update the source standards from official websites, process them, and store them locally in a form that supports both rule‑based gap detection today and semantic LLM queries tomorrow. Use a local vector database (ChromaDB) with embeddings and a structured JSON store for the gap rules.
+
+1. Overall Architecture & Technology Stack
+Architecture overview (components):
+
+text
+┌─────────────────────────────────────────────────────┐
+│                    Streamlit UI                      │
+│  - Questionnaire pages                               │
+│  - Gap report dashboard                              │
+│  - Admin panel (trigger standards update)            │
+└───────────────┬─────────────────────────────────────┘
+                │
+                v
+┌─────────────────────────────────────────────────────┐
+│             Gap Analysis Engine                      │
+│  - Loads rule mappings from JSON                     │
+│  - Executes deterministic gap detection              │
+│  - Calls vector store for reference evidence         │
+│  - (Future) calls LLM for open-ended analysis        │
+└──────┬───────────────────────────────┬──────────────┘
+       │                               │
+       v                               v
+┌──────────────────┐     ┌────────────────────────────┐
+│  Structured Rule │     │  Vector Knowledge Base      │
+│  JSON Database   │     │  (ChromaDB)                 │
+│  - gap_rules.json│     │  - Standards chunks         │
+│  - questionnaire │     │  - Embeddings               │
+│  - mitigations   │     │  - Metadata: standard,      │
+└──────────────────┘     │    clause, version, date    │
+                          └────────────────────────────┘
+                                   ^
+                                   │ (update)
+                          ┌────────────────────┐
+                          │ Standards Ingestion │
+                          │ Pipeline (Airflow / │
+                          │ cron script)        │
+                          │ - Download PDFs     │
+                          │ - Parse & chunk     │
+                          │ - Embed & store     │
+                          └────────────────────┘
+Tech Stack (all Python 3.11+):
+
+Component	Technology
+Frontend	Streamlit
+Configuration	pydantic settings, .env
+Questionnaire	streamlit-option-menu, custom state management
+Gap rule engine	Pure Python, loaded from JSON files (Pydantic models)
+Vector store	ChromaDB (persistent local)
+Embeddings	sentence-transformers (all-MiniLM-L6-v2, lightweight)
+PDF parsing	PyMuPDF (fitz), pdfplumber
+Text splitting	langchain.text_splitter.RecursiveCharacterTextSplitter (or standalone)
+Ingestion scheduler	APScheduler (lightweight in‑app) or external cron
+API (future)	FastAPI (mounted alongside Streamlit if needed)
+LLM integration (future)	LangChain, chromadb retriever, OpenAI/Anthropic API
+Testing	pytest, pytest-cov
+Code quality	black, ruff, mypy, pre-commit
+
+CI/CD	GitHub Actions
+2. Detailed Project Workplan (Phases)
+Phase 1: Requirements & Knowledge Curation (Manual Bootstrapping)
+Identify all relevant Australian standards
+
+APRA: CPS 230 (Operational Risk), CPS 220 (Risk Management), CPS 510 (Governance), LPS 110 (Capital Adequacy), LPS 220 (Risk Management for Life Insurers), etc.
+
+Actuarial: Professional Standard 200 (Life Insurance Valuation), PS 300 (Actuarial Reporting), PS 400 (Model Governance – if applicable), and any relevant Guidance Notes.
+
+Curate a master structured rule set (initially JSON)
+
+For each standard, break down into granular requirements (e.g., “CPS 230 ¶ 27(b): documented risk appetite statement”).
+
+Design a questionnaire that probes these requirements.
+
+Map each question to one or many requirement IDs; assign a gap logic (e.g., if answer is “No” → gap).
+
+For each gap, write a mitigation recommendation (text) and link to the exact clause.
+
+This will be stored in data/gap_rules.json.
+
+Source URLs for standards (APRA website, Actuaries Institute website). Record them in a standards_sources.yaml.
+
+Phase 2: Standards Ingestion Pipeline (Automatic)
+Build a standalone module standards_ingestion that:
+
+Reads standards_sources.yaml (URL, title, category, expected last-modified date).
+
+Downloads PDFs to data/raw_pdfs/ using requests with polite headers and ETag/Last-Modified checking to avoid redundant downloads.
+
+Parses each PDF with PyMuPDF (fast text extraction) → doc_id, source, version, timestamp.
+
+Splits text into overlapping chunks (e.g., 500 tokens with 50 overlap) using RecursiveCharacterTextSplitter.
+
+Generates embeddings using sentence-transformers/all-MiniLM-L6-v2 (384 dims).
+
+Stores chunks in ChromaDB collection standards_collection with metadata: standard_name, clause (if detectable via regex), chunk_index, published_date, source_url.
+
+Optionally attempts to extract clause numbers via regex (e.g., ¶ 27(b), Paragraph 30) and stores them for direct clause lookup.
+
+Logs the process and saves a last_update.json with timestamps.
+
+This pipeline can be run on app startup (if out of date) or scheduled via APScheduler inside Streamlit (or via a separate CLI script for maintenance).
+
+Phase 3: Structured Rule Base & Questionnaire Design
+Design the questionnaire JSON (or Pydantic models) with:
+
+Sections (e.g., “Board Oversight”, “Model Development”, “Model Validation”, “Data Governance”, “Documentation”, “Independent Review”).
+
+Questions with answer type: boolean (Yes/No), multi-choice, text.
+
+Each question links to one or more requirement_ids.
+
+Each requirement has conditional gap logic: {"if_answer": "No", "gap": true, "severity": "high", "mitigation": "..."}.
+
+Store the full definition in data/questionnaire.json and data/gap_rules.json.
+
+Phase 4: Gap Analysis Engine
+Module engine/gap_analyzer.py:
+
+Takes the user’s answers (dictionary).
+
+Evaluates all mapped requirements.
+
+Computes a list of GapFinding objects: requirement_id, clause_reference, question, user_answer, gap_severity, mitigation, evidence_text (optional snippet from vector store).
+
+For each finding, optionally performs a similarity search in the vector store to retrieve the relevant standard text, to show the user the exact source.
+
+Phase 5: Streamlit UI
+Multi‑page app (using st.navigation or session state page switching):
+
+Home: Introduction, disclaimer, option to start new analysis or upload previous session.
+Questionnaire: Stepped form, progress bar, dynamic sections.
+Gap Report: Interactive table (filter by severity, category), expandable evidence with standard text. Export to PDF/Excel.
+Admin (hidden): Trigger standards update manually, view logs, check vector store status.
+All heavy processing cached via @st.cache_resource (vector store, rule engine).
+
+State management via st.session_state (answers, current step).
+
+Phase 6: Future API & LLM Integration
+Design a separate api module using FastAPI that exposes:
+
+POST /analyze – receives a set of answers and returns gap report JSON.
+
+GET /standards/search?q=... – semantic search over standards.
+
+POST /async_analyze – accepts uploaded documents, triggers LLM‑powered analysis.
+
+The vector store and rule engine are shared, so the API can run as a sub‑application in the same process (or separate container).
+
+For LLM integration, later we will build a retriever from ChromaDB and use an LLM chain to answer the questionnaire automatically given a company’s policy PDFs.
+
+3. Project Directory Structure
+text
+compliance_gap_analyser/
+├── app.py                     # Streamlit entry point
+├── config.py                  # Pydantic settings
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── pyproject.toml             # black, ruff, mypy config
+├── README.md
+│
+├── engine/
+│   ├── __init__.py
+│   ├── gap_analyzer.py        # Core gap detection logic
+│   ├── questionnaire.py       # Load and validate Q
+│   └── schemas.py             # Pydantic models for rules, gaps, answers
+│
+├── standards_ingestion/
+│   ├── __init__.py
+│   ├── downloader.py          # Download PDFs with caching
+│   ├── parser.py              # PDF text extraction, chunking
+│   ├── embedder.py            # Embedding generation & ChromaDB upsert
+│   ├── scheduler.py           # APScheduler setup for periodic updates
+│   └── sources.yaml           # List of standards to fetch
+│
+├── data/
+│   ├── raw_pdfs/              # .gitignored except placeholder
+│   ├── chroma_db/             # Persistent ChromaDB storage
+│   ├── gap_rules.json         # Curated rules (version controlled)
+│   ├── questionnaire.json     # Curated questionnaire (version controlled)
+│   └── last_update.json       # Timestamps of ingestion
+│
+├── ui/
+│   ├── __init__.py
+│   ├── home.py
+│   ├── questionnaire_ui.py
+│   └── report_ui.py
+│
+├── api/                       # Future
+│   ├── __init__.py
+│   ├── main.py                # FastAPI app
+│   └── routes.py
+│
+├── tests/
+│   ├── test_gap_analyzer.py
+│   ├── test_ingestion.py
+│   └── fixtures/              # Sample PDFs, mock answers
+│
+└── scripts/
+    ├── run_ingestion.py       # CLI for manual ingestion
+    └── seed_questionnaire.py  # Helper to validate/seed rules
+4. Coding Standards & Conventions (Mandatory)
+Python style: black (line length 100), ruff for linting, mypy strict mode.
+
+Type hints: Every function signature and complex variable must be annotated.
+
+Docstrings: Google style for modules, classes, and functions; include Args, Returns, Raises.
+
+Configuration: All configurable values (file paths, model names, API keys) in config.py using pydantic.BaseSettings, loaded from environment / .env.
+
+Logging: Use logging module, configure in app.py; do not use print for operational messages.
+
+Error handling: Never swallow exceptions silently. Use custom exception classes (StandardsDownloadError, IngestionError). Streamlit UI catches and displays user-friendly errors.
+
+Modularity: Keep components loosely coupled; the engine must be importable and testable without Streamlit.
+
+Testing: Unit tests for gap logic, PDF parser (with fixtures), embeddings (mock ChromaDB). Aim for >80% coverage.
+
+Version control: Use Git; the data/gap_rules.json and data/questionnaire.json are part of the repo (they are curated). data/raw_pdfs/ and data/chroma_db/ are in .gitignore.
+
+5. Automatic Standards Update & Local Storage Efficiency
+The “efficient local storage” is achieved by:
+
+Vector store (ChromaDB) – persists on disk, supports incremental updates (upsert by doc_id). Embeddings are generated once per chunk and reused; only changed PDFs re‑indexed.
+
+Smart downloading – uses HTTP If-Modified-Since and ETag to avoid re‑downloading unchanged files. A metadata file last_update.json tracks last successful fetch per source.
+
+Modular pipeline – can be triggered via:
+
+Streamlit admin button (synchronous, using st.cache_resource to avoid re‑ingestion).
+
+A scheduled background thread using APScheduler that runs once a week (if Streamlit is running).
+
+A separate CLI script python -m scripts.run_ingestion that can be called by external cron or a GitHub Action.
+
+Chunking & embedding strategy:
+
+Use sentence‑transformers with a small, fast model (384‑dim) to keep the vector index compact.
+
+Split only at paragraph boundaries when possible; don’t break mid‑clause.
+
+Store clause numbers as explicit metadata (via regex extraction during parsing) so that gap rules can directly look up “CPS 230 ¶ 27(b)” without a fuzzy search.
+
+6. Building the gap_rules.json Structure (Standard Creation Standard)
+This file is the core of the deterministic gap analyser. It must be machine‑readable and extensible by future LLM pipelines. Define a strict JSON Schema (also represented as Pydantic models in engine/schemas.py).
+
+Example snippet:
+
+json
+{
+  "standards_version": "2025-04-01",
+  "requirements": [
+    {
+      "id": "CPS230-27b",
+      "standard": "CPS 230",
+      "clause": "Paragraph 27(b)",
+      "description": "The Board must approve a documented risk appetite statement that sets out...",
+      "category": "Board Oversight",
+      "gap_condition": {
+        "question_id": "q_risk_appetite",
+        "logic": "equals",
+        "value": "No"
+      },
+      "severity_if_gap": "high",
+      "mitigation": "Draft a Board risk appetite statement aligned with CPS 230. Conduct a special board meeting to approve it and record in minutes.",
+      "reference_url": "https://www.apra.gov.au/.../cps-230"
+    }
+  ]
+}
+Questionnaire JSON:
+
+json
+{
+  "sections": [
+    {
+      "title": "Board & Senior Management Oversight",
+      "questions": [
+        {
+          "id": "q_risk_appetite",
+          "text": "Has the Board approved a documented risk appetite statement that covers model risk?",
+          "type": "boolean",
+          "default": null
+        }
+      ]
+    }
+  ]
+}
+Future LLM integration: The LLM can be given this schema and the ability to call the API; it will answer q_risk_appetite based on uploaded documents, then the same gap engine runs.
+
+7. Step‑by‑Step Implementation Instructions for the LLM
+(These are the exact steps you must follow to generate the full codebase.)
+
+Step 0: Environment Setup
+Create project directory and a pyproject.toml with dependencies: streamlit, pydantic, pydantic-settings, chromadb, sentence-transformers, PyMuPDF, pdfplumber, langchain-text-splitters, requests, PyYAML, apscheduler, loguru (or standard logging), python-dotenv. Dev dependencies: pytest, pytest-cov, black, ruff, mypy.
+
+Write a Dockerfile and docker-compose.yml for easy deployment.
+
+Step 1: Configuration (config.py)
+python
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    chroma_persist_directory: str = "data/chroma_db"
+    embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
+    ingestion_schedule_hours: int = 168  # 1 week
+    standards_sources_file: str = "standards_ingestion/sources.yaml"
+    gap_rules_path: str = "data/gap_rules.json"
+    questionnaire_path: str = "data/questionnaire.json"
+    # ... etc.
+    class Config:
+        env_file = ".env"
+Step 2: Data Models (engine/schemas.py)
+Define Pydantic models for GapRule, Question, Answer, GapFinding. Ensure they can be serialised/deserialised to/from the JSON files.
+
+Step 3: Standards Ingestion Pipeline
+downloader.py: Use requests.Session with If-Modified-Since. Accept a source dictionary. Return a list of file paths and a flag if updated.
+
+parser.py: Function extract_text_from_pdf(pdf_path) -> str. Function chunk_text(text, metadata) -> List[Document] (where Document is a simple dataclass with page_content and metadata). Implement clause extraction regex: r'(?:¶|Paragraph|Clause)\s*(\d+[A-Za-z]?(?:\([a-z]+\))?)'. Add extracted clauses to metadata.
+
+embedder.py: Initialize SentenceTransformerEmbeddings (wraps the model). Create or get ChromaDB collection. upsert_documents(docs) with doc IDs based on source_name-chunk_index.
+
+scheduler.py: Use APScheduler’s BackgroundScheduler to run the full pipeline every week, if running inside Streamlit; otherwise provide a standalone function.
+
+CLI script: scripts/run_ingestion.py that orchestrates the pipeline and prints a report.
+
+Step 4: Gap Engine
+questionnaire.py: Loads questionnaire.json, provides get_all_questions().
+
+gap_analyzer.py: analyze(answers: Dict[str, Any]) -> List[GapFinding]. For each rule in gap_rules.json, evaluate condition against user answer; if triggered, create a GapFinding, optionally augment with a chunk from ChromaDB using chroma.similarity_search(rule.description, k=1).
+
+Use @st.cache_resource for loading the vector store and rules.
+
+Step 5: Streamlit UI
+app.py: Main entry with st.set_page_config, title “Life Insurance Compliance Gap Analyser”. Use session state to track page and answers.
+
+Home page: ui/home.py – introduction, a button “Begin Assessment”.
+
+Questionnaire page: ui/questionnaire_ui.py – renders sections as expanders, collects answers into st.session_state.answers. On completion, transition to report page.
+
+Report page: ui/report_ui.py – calls engine.gap_analyzer.analyze(). Displays summary metrics (total gaps, high/medium/low), interactive dataframe (with st.dataframe), expandable rows showing mitigation and evidence. Include export buttons (CSV, Excel via openpyxl).
+
+Admin page: accessible via /admin? or a sidebar toggle. Shows last ingestion date, button to force update now, logs.
+
+Step 6: Maintenance & Update Mechanisms
+Write a run_ingestion function that is called once on app startup (if last_update.json indicates it’s time or missing). Use st.spinner and st.status for progress.
+
+Ensure all heavy processing is wrapped in try/except and logs errors to a file.
+
+Step 7: Testing
+For each module, write unit tests. Mock HTTP calls, test gap logic with a small ruleset, test chunking with a sample PDF (including clause regex).
+
+Test the streamlit UI using streamlit.testing (new in 1.28+).
+
+Step 8: Future API (Preparation)
+Add a separate FastAPI app in api/main.py that imports the same engine modules.
+
+Define Pydantic models for request/response.
+
+For now, just stub the endpoints; they can be mounted later via streamlit.web.cli or run separately.
+
+8. Detailed Code Snippets for Critical Parts
+(I’ll provide illustrative code you must implement, not full files.)
+
+ChromaDB retrieval in gap analyzer:
+
+python
+def get_evidence_text(requirement_description: str, collection, embedder, k=1) -> str:
+    query_embedding = embedder.embed_query(requirement_description)
+    results = collection.query(query_embeddings=[query_embedding], n_results=k)
+    return results['documents'][0][0] if results['documents'] else ""
+Gap rule evaluation:
+
+python
+def evaluate_rule(rule: GapRule, answers: dict) -> bool:
+    user_answer = answers.get(rule.question_id)
+    if user_answer is None:
+        return False
+    if rule.gap_condition.logic == "equals":
+        return user_answer == rule.gap_condition.value
+    # add more logic types (contains, not_equals)
+    return False
+PDF clause extraction:
+
+python
+import re
+clause_pattern = re.compile(r'(?:Paragraph|Clause|¶)\s*(\d+[A-Z]?(?:\([a-z]+\))?)', re.IGNORECASE)
+matches = clause_pattern.findall(text)
+Scheduled update in Streamlit:
+
+python
+@st.cache_resource
+def init_scheduler(settings):
+    from apscheduler.schedulers.background import BackgroundScheduler
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(run_full_ingestion, 'interval', hours=settings.ingestion_schedule_hours)
+    scheduler.start()
+    return scheduler
+9. Maintenance and Evolution Plan
+Standards update monitoring: Regularly check APRA and Actuaries Institute sitemaps. The sources.yaml can be extended with new standards.
+
+Gap rules evolution: The gap_rules.json is version‑controlled; any changes to questionnaire or rules require a review by a qualified actuary. The system can include a “rule version” to flag analyses performed under older rules.
+
+LLM readiness: When integrating an LLM, the gap_analyzer can accept answers that were auto‑generated by the LLM after reading documents. The engine remains unchanged. The vector store will serve as the retrieval knowledge base for the LLM (via LangChain’s Chroma retriever).
+
+API first: The FastAPI layer will be built so that the same engine can be used headless, enabling batch analysis or integration into CI/CD pipelines for model governance.
+
+10. Final Notes for the LLM Implementation
+Respect robots.txt and terms of use when downloading standards. Use proper caching and throttling.
+
+Design for offline usage: The app should work completely locally after initial standards download.
+
+User experience: Streamlit must be responsive; use @st.cache_data for questionnaire loading, @st.cache_resource for vector store and engine.
+
+Security: No API keys needed in the initial version. In future LLM integration, handle API keys via environment variables.
+
+Now, generate the complete codebase following this instruction, ensuring every module is fully functional, well‑tested, and immediately deployable.

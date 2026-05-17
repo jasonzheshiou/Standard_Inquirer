@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "compliance-gap-analyser"
+version = "0.1.0"
+description = "A Streamlit app for Australian life insurance model governance gap analysis"
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit>=1.31.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "chromadb>=1.0.0,<2.0.0",
+    "sentence-transformers>=2.2.0",
+    "PyMuPDF>=1.23.0",
+    "pdfplumber>=0.10.0",
+    "langchain-text-splitters>=0.0.1",
+    "requests>=2.31.0",
+    "PyYAML>=6.0.1",
+    "loguru>=0.7.0",
+    "python-dotenv>=1.0.0",
+    "openpyxl>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.0.0",
+    "ruff>=0.2.0",
+    "mypy>=1.8.0",
+    "streamlit-testing>=0.1.0",
+    "responses>=0.25.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["engine*", "standards_ingestion*", "ui*", "scripts*", "api*", "llm*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

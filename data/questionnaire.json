@@ -1,0 +1,72 @@
+{
+  "sections": [
+    {
+      "title": "Board & Senior Management Oversight",
+      "questions": [
+        {
+          "id": "q_risk_appetite",
+          "text": "Has the Board approved a documented risk appetite statement that covers model risk?",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "id": "q_risk_governance",
+          "text": "Is there a documented model risk governance framework approved by the Board?",
+          "type": "text",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "title": "Model Inventory & Validation",
+      "questions": [
+        {
+          "id": "q_model_inventory",
+          "text": "Does the organisation maintain a comprehensive inventory of all models in use?",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "id": "q_model_validation",
+          "text": "Are models independently validated before deployment and at least annually thereafter?",
+          "type": "text",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "title": "Data Governance",
+      "questions": [
+        {
+          "id": "q_data_governance",
+          "text": "Is there a documented data governance framework covering model inputs and outputs?",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "id": "q_documentation",
+          "text": "Are model documentation standards met including assumptions, limitations, and methodology?",
+          "type": "text",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "title": "Risk Escalation & Reporting",
+      "questions": [
+        {
+          "id": "q_escalation",
+          "text": "Is there a documented process for escalating model-related issues to the Board?",
+          "type": "text",
+          "default": ""
+        },
+        {
+          "id": "q_concentration_risk",
+          "text": "Does the risk framework address concentration risk in model inputs and outputs?",
+          "type": "text",
+          "default": ""
+        }
+      ]
+    }
+  ]
+}

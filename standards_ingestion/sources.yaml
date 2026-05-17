@@ -1,0 +1,427 @@
+sources:
+- name: "CPS 001 \xE2\u20AC\u201D Defined Terms"
+  summary: Defines standard terminology and abbreviations used across all APRA Prudential
+    Standards
+  url: https://handbook.apra.gov.au/standard/cps-001
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 190 \xE2\u20AC\u201D Recovery and Exit Planning"
+  summary: Requires APRA-regulated entities to develop and maintain recovery and exit
+    plans to manage financial distress
+  url: https://handbook.apra.gov.au/standard/cps-190
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 220 \xE2\u20AC\u201D Risk Management"
+  summary: Sets out requirements for entities to establish and maintain a robust risk
+    management framework
+  url: https://handbook.apra.gov.au/standard/cps-220
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 226 \xE2\u20AC\u201D Margining & Risk Mitigation for Non-Centrally Cleared\
+    \ Derivatives"
+  summary: Specifies margining and risk mitigation techniques for non-centrally cleared
+    derivative contracts
+  url: https://handbook.apra.gov.au/standard/cps-226
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 230 \xE2\u20AC\u201D Operational Risk Management"
+  summary: Requires entities to identify, assess, and manage operational risks including
+    material operational risk events reporting
+  url: https://www.apra.gov.au/sites/default/files/2021-05/CPS%20230.pdf
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 234 \xE2\u20AC\u201D Information Security"
+  summary: Imposes information security requirements including incident reporting
+    and resilience testing for APRA-regulated entities
+  url: https://handbook.apra.gov.au/standard/cps-234
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 320 \xE2\u20AC\u201D Actuarial and Related Matters"
+  summary: Requires entities to appoint actuaries and address actuarial matters in
+    prudential reporting and governance
+  url: https://handbook.apra.gov.au/standard/cps-320
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 510 \xE2\u20AC\u201D Governance"
+  summary: Sets governance requirements including board and senior management responsibilities
+    for APRA-regulated entities
+  url: https://handbook.apra.gov.au/standard/cps-510
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 511 \xE2\u20AC\u201D Remuneration"
+  summary: Establishes remuneration principles and practices to align incentives with
+    prudent risk management
+  url: https://handbook.apra.gov.au/standard/cps-511
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 520 \xE2\u20AC\u201D Fit and Proper"
+  summary: Requires key personnel and board members to be fit and proper to hold their
+    positions
+  url: https://handbook.apra.gov.au/standard/cps-520
+  category: APRA
+  expected_last_modified: null
+- name: "CPS 900 \xE2\u20AC\u201D Resolution Planning"
+  summary: Requires entities to prepare and maintain resolution plans to support orderly
+    failure and recovery
+  url: https://handbook.apra.gov.au/standard/cps-900
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 100 \xE2\u20AC\u201D Solvency Standard"
+  summary: Defines the solvency framework and prescribed capital amount for life insurance
+    and friendly society entities
+  url: https://handbook.apra.gov.au/standard/lps-100
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 110 \xE2\u20AC\u201D Capital Adequacy"
+  summary: Sets minimum capital adequacy requirements for APRA-regulated life insurance
+    entities
+  url: https://handbook.apra.gov.au/standard/lps-110
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 112 \xE2\u20AC\u201D Capital Adequacy: Measurement of Capital"
+  summary: Specifies how to measure and classify the capital base of life insurance
+    entities
+  url: https://handbook.apra.gov.au/standard/lps-112
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 114 \xE2\u20AC\u201D Capital Adequacy: Asset Risk Charge"
+  summary: Defines the methodology for calculating the asset risk charge under the
+    solvency standard
+  url: https://handbook.apra.gov.au/standard/lps-114
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 115 \xE2\u20AC\u201D Capital Adequacy: Insurance Risk Charge"
+  summary: Sets the methodology for calculating the insurance risk charge for life
+    insurers
+  url: https://handbook.apra.gov.au/standard/lps-115
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 117 \xE2\u20AC\u201D Capital Adequacy: Asset Concentration Risk Charge"
+  summary: Specifies requirements for measuring and managing asset concentration risk
+    under capital adequacy
+  url: https://handbook.apra.gov.au/standard/lps-117
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 118 \xE2\u20AC\u201D Capital Adequacy: Operational Risk Charge"
+  summary: Defines the operational risk charge calculation as a component of the solvency
+    standard
+  url: https://handbook.apra.gov.au/standard/lps-118
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 200 \xE2\u20AC\u201D Capital Adequacy: Supplementary Information"
+  summary: Provides supplementary capital adequacy guidance and information for regulated
+    entities
+  url: https://handbook.apra.gov.au/standard/lps-200
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 230 \xE2\u20AC\u201D Reinsurance Management"
+  summary: Requires entities to establish sound reinsurance management practices and
+    assess counterparty credit risk
+  url: https://handbook.apra.gov.au/standard/lps-230
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 340 \xE2\u20AC\u201D Valuation of Policy Liabilities"
+  summary: Sets requirements for valuing policy liabilities including discount rates
+    and risk margins
+  url: https://handbook.apra.gov.au/standard/lps-340
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 360 \xE2\u20AC\u201D Termination Values"
+  summary: Specifies how to calculate and disclose termination values for life insurance
+    policies
+  url: https://handbook.apra.gov.au/standard/lps-360
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 370 \xE2\u20AC\u201D Investment Performance Guarantees"
+  summary: Requires entities to manage and disclose investment performance guarantees
+    and related risks
+  url: https://handbook.apra.gov.au/standard/lps-370
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 600 \xE2\u20AC\u201D Statutory Funds"
+  summary: Governs the establishment, management, and reporting requirements for statutory
+    funds
+  url: https://handbook.apra.gov.au/standard/lps-600
+  category: APRA
+  expected_last_modified: null
+- name: "LPS 700 \xE2\u20AC\u201D Friendly Society Benefit Funds"
+  summary: Sets requirements for the establishment and management of friendly society
+    benefit funds
+  url: https://handbook.apra.gov.au/standard/lps-700
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 001 \xE2\u20AC\u201D Reporting Requirements"
+  summary: Outlines general financial and regulatory reporting requirements for APRA-regulated
+    life insurers
+  url: https://handbook.apra.gov.au/standard/lrs-001
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 110.0 \xE2\u20AC\u201D Prescribed Capital Amount"
+  summary: Specifies the calculation methodology for the prescribed capital amount
+    under the solvency standard
+  url: https://handbook.apra.gov.au/standard/lrs-110-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 111.0 \xE2\u20AC\u201D Adjustments and Exclusions"
+  summary: Details adjustments and exclusions to be applied when calculating capital
+    adequacy measures
+  url: https://handbook.apra.gov.au/standard/lrs-111-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 112.0 \xE2\u20AC\u201D Determination of Capital Base"
+  summary: Prescribes the method for determining and reporting the capital base of
+    regulated entities
+  url: https://handbook.apra.gov.au/standard/lrs-112-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 112.3 \xE2\u20AC\u201D Related Party Exposures"
+  summary: Requires disclosure of exposures to related parties and associated concentration
+    risks
+  url: https://handbook.apra.gov.au/standard/lrs-112-3
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 114.0 \xE2\u20AC\u201D Asset Risk Charge"
+  summary: Requires reporting of the asset risk charge component under the solvency
+    standard
+  url: https://handbook.apra.gov.au/standard/lrs-114-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 114.2 \xE2\u20AC\u201D Derivatives Activity"
+  summary: Requires disclosure of derivatives holdings, exposures, and associated
+    risk metrics
+  url: https://handbook.apra.gov.au/standard/lrs-114-2
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 114.3 \xE2\u20AC\u201D Off-balance Sheet Business"
+  summary: Requires reporting of off-balance sheet exposures and commitments of regulated
+    entities
+  url: https://handbook.apra.gov.au/standard/lrs-114-3
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 115.0 \xE2\u20AC\u201D Insurance Risk Charge"
+  summary: Requires reporting of the insurance risk charge component under the solvency
+    standard
+  url: https://handbook.apra.gov.au/standard/lrs-115-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 117.0 \xE2\u20AC\u201D Asset Concentration Risk Charge"
+  summary: Requires reporting of the asset concentration risk charge and related exposures
+  url: https://handbook.apra.gov.au/standard/lrs-117-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 118.0 \xE2\u20AC\u201D Operational Risk Charge"
+  summary: Requires reporting of the operational risk charge and related operational
+    risk data
+  url: https://handbook.apra.gov.au/standard/lrs-118-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 200.0 \xE2\u20AC\u201D Capital Adequacy Supplementary"
+  summary: Provides supplementary capital adequacy reporting templates and explanatory
+    guidance
+  url: https://handbook.apra.gov.au/standard/lrs-200-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 300.0 \xE2\u20AC\u201D Statement of Financial Position"
+  summary: Specifies the format and content requirements for the statement of financial
+    position
+  url: https://handbook.apra.gov.au/standard/lrs-300-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 310.0 \xE2\u20AC\u201D Statement of Profit or Loss"
+  summary: Specifies the format and content requirements for the statement of profit
+    or loss
+  url: https://handbook.apra.gov.au/standard/lrs-310-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 311.0 \xE2\u20AC\u201D P&L by Product Group"
+  summary: Requires profit or loss to be reported and analysed by product group classification
+  url: https://handbook.apra.gov.au/standard/lrs-311-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 340.0 \xE2\u20AC\u201D Retained Profits & Policy Liabilities"
+  summary: Requires reporting of retained profits and policy liabilities with explanatory
+    analysis
+  url: https://handbook.apra.gov.au/standard/lrs-340-0
+  category: APRA
+  expected_last_modified: null
+- name: "LRS 750 \xE2\u20AC\u201D Claims and Disputes"
+  summary: Requires reporting of claims handling statistics, outstanding claims, and
+    dispute data
+  url: https://handbook.apra.gov.au/standard/lrs-750
+  category: APRA
+  expected_last_modified: null
+- name: "3PS 310 \xE2\u20AC\u201D Audit and Related Matters"
+  summary: Sets requirements for internal and external audit functions and related
+    governance matters
+  url: https://handbook.apra.gov.au/standard/3ps-310
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 110 \xE2\u20AC\u201D ICAAP and Supervisory Review"
+  summary: Guides entities on conducting the Internal Capital Adequacy Assessment
+    Process and supervisory review
+  url: https://handbook.apra.gov.au/standard/cpg-110
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 190 \xE2\u20AC\u201D Recovery and Exit Planning"
+  summary: Provides practical guidance on preparing and maintaining effective recovery
+    and exit plans
+  url: https://handbook.apra.gov.au/standard/cpg-190
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 220 \xE2\u20AC\u201D Risk Management"
+  summary: Provides practical guidance on implementing an effective risk management
+    framework
+  url: https://handbook.apra.gov.au/standard/cpg-220
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 230 \xE2\u20AC\u201D Operational Risk Management"
+  summary: Provides practical guidance on managing operational risk and reporting
+    material events
+  url: https://handbook.apra.gov.au/standard/cpg-230
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 234 \xE2\u20AC\u201D Information Security"
+  summary: Provides practical guidance on meeting information security and incident
+    reporting requirements
+  url: https://handbook.apra.gov.au/standard/cpg-234
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 320 \xE2\u20AC\u201D Actuarial and Related Matters"
+  summary: Provides practical guidance on actuarial functions and related prudential
+    matters
+  url: https://handbook.apra.gov.au/standard/cpg-320
+  category: APRA
+  expected_last_modified: null
+- name: "CPG 900 \xE2\u20AC\u201D Resolution Planning"
+  summary: Provides practical guidance on preparing and maintaining effective resolution
+    plans
+  url: https://handbook.apra.gov.au/standard/cpg-900
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 230 \xE2\u20AC\u201D Operational Risk"
+  summary: Provides life insurance-specific guidance on managing operational risk
+    effectively
+  url: https://handbook.apra.gov.au/standard/lpg-230
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 240 \xE2\u20AC\u201D Life Insurance Risk and Reinsurance Management"
+  summary: Provides life insurance-specific guidance on risk and reinsurance management
+    practices
+  url: https://handbook.apra.gov.au/standard/lpg-240
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 250 \xE2\u20AC\u201D Life Insurance Guidance"
+  summary: Provides life insurance-specific prudential guidance on risk management
+    and governance
+  url: https://handbook.apra.gov.au/standard/lpg-250
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 260 \xE2\u20AC\u201D Life Insurance Guidance"
+  summary: Provides life insurance-specific prudential guidance on operational matters
+  url: https://handbook.apra.gov.au/standard/lpg-260
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 270 \xE2\u20AC\u201D Life Insurance Guidance"
+  summary: Provides life insurance-specific prudential guidance on risk management
+    practices
+  url: https://handbook.apra.gov.au/standard/lpg-270
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 520 \xE2\u20AC\u201D Fit and Proper"
+  summary: Provides guidance on assessing and maintaining fit and proper requirements
+    for key personnel
+  url: https://handbook.apra.gov.au/standard/lpg-520
+  category: APRA
+  expected_last_modified: null
+- name: "LPG 700 \xE2\u20AC\u201D Friendly Society Benefit Funds"
+  summary: Provides guidance on establishing and managing friendly society benefit
+    funds
+  url: https://handbook.apra.gov.au/standard/lpg-700
+  category: APRA
+  expected_last_modified: null
+- name: "PS 1 \xE2\u20AC\u201D Continuing Professional Development"
+  summary: Requires actuaries to maintain and demonstrate ongoing professional competence
+    and development
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/ps-1-continuing-professional-development
+  category: APRA
+  expected_last_modified: null
+- name: "PS 102 \xE2\u20AC\u201D Financial Condition Report"
+  summary: Sets standards for preparing and signing the Financial Condition Report
+    as an appointed actuary
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/ps-102-financial-condition-report
+  category: APRA
+  expected_last_modified: null
+- name: "PS 103 \xE2\u20AC\u201D Actuarial Review"
+  summary: Establishes standards for conducting actuarial reviews of regulated entities
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/ps-103-actuarial-review
+  category: APRA
+  expected_last_modified: null
+- name: "PS 201 \xE2\u20AC\u201D Actuarial Advice to a Life Insurance Company or Friendly\
+    \ Society"
+  summary: Sets standards for providing actuarial advice to life insurance companies
+    and friendly societies
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/ps-201-actuarial-advice-to-a-life-insurance-company-or-friendly-society
+  category: APRA
+  expected_last_modified: null
+- name: "PS 202 \xE2\u20AC\u201D Actuarial Valuations for Life Insurance Companies"
+  summary: Establishes standards for performing actuarial valuations for life insurance
+    companies
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/ps-202-actuarial-valuations-for-life-insurance-companies
+  category: APRA
+  expected_last_modified: null
+- name: "PG 1 \xE2\u20AC\u201D General Actuarial Practice"
+  summary: Provides general principles and guidance for sound actuarial practice
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-1-general-actuarial-practice
+  category: APRA
+  expected_last_modified: null
+- name: "PG 4 \xE2\u20AC\u201D AASB 17 Insurance Contracts"
+  summary: Provides actuarial implementation guidance for AASB 17 Insurance Contracts
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-4-aasb-17-insurance-contracts
+  category: APRA
+  expected_last_modified: null
+- name: "PG 5 \xE2\u20AC\u201D Insurer Enterprise Risk Models"
+  summary: Provides guidance on developing and validating enterprise risk models for
+    insurers
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-5-insurer-enterprise-risk-models
+  category: APRA
+  expected_last_modified: null
+- name: "PG 6A \xE2\u20AC\u201D Target Capital Life, General and Health Insurance"
+  summary: Provides guidance on determining and communicating target capital for life,
+    general, and health insurers
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-6a-target-capital-life-general-and-health-insurance
+  category: APRA
+  expected_last_modified: null
+- name: "PG 6B \xE2\u20AC\u201D Actuarial Advice Regarding Risk Management"
+  summary: Provides guidance on providing actuarial advice related to risk management
+    practices
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-6b-actuarial-advice-regarding-risk-management
+  category: APRA
+  expected_last_modified: null
+- name: "PG 101 \xE2\u20AC\u201D Investment Performance Measurement and Presentation"
+  summary: Sets standards for measuring and presenting investment performance data
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-101-investment-performance-measurement-and-presentation
+  category: APRA
+  expected_last_modified: null
+- name: "PG 199.02 \xE2\u20AC\u201D Relationship with the Auditor"
+  summary: Provides guidance on the actuarial role and interaction with external auditors
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-199-02-relationship-with-the-auditor
+  category: APRA
+  expected_last_modified: null
+- name: "PG 199.03 \xE2\u20AC\u201D Economic Valuations"
+  summary: Provides guidance on conducting economic valuations and related actuarial
+    work
+  url: https://www.actuaries.asn.au/professional-standards-and-regulation/standards-guidance/pg-199-03-economic-valuations
+  category: APRA
+  expected_last_modified: null
+- name: "AASB 17 \xE2\u20AC\u201D Insurance Contracts"
+  summary: Australian accounting standard for insurance contract recognition, measurement,
+    presentation, and disclosure
+  url: https://www.aasb.gov.au/standards/by-date/current-effective-standards/aasb-17-insurance-contracts
+  category: AASB
+  expected_last_modified: null
+- name: "IFRS 17 \xE2\u20AC\u201D Insurance Contracts"
+  summary: International accounting standard for insurance contract recognition, measurement,
+    presentation, and disclosure
+  url: https://www.ifrs.org/issued-standards/list-of-standards/ifrs-17-insurance-contracts/
+  category: IFRS
+  expected_last_modified: null

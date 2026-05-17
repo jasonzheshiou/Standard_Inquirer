@@ -1,0 +1,18 @@
+# Custom standards sources — add your own regulatory/standards references here.
+# Each entry must have: name, url, category, summary.
+
+sources:
+  - name: "SOX Section 404 — Internal Controls"
+    url: "https://www.sec.gov/rules/final/34-47968.pdf"
+    category: "SOX"
+    summary: "Sarbanes-Oxley Section 404 requirements for internal control over financial reporting."
+
+  - name: "NIST SP 800-53 Rev. 5 — Security Controls"
+    url: "https://csrc.nist.gov/pubs/sp/800-53/r5/final"
+    category: "NIST"
+    summary: "Security and privacy controls for information systems and organizations."
+
+  - name: "ISO 27001:2022 — Information Security"
+    url: "https://www.iso.org/standard/27001"
+    category: "ISO"
+    summary: "International standard for information security management systems (ISMS)."
