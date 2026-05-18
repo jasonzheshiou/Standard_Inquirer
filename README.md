@@ -114,6 +114,54 @@ Copy `.env.example` to `.env` and configure:
 | `CHROMA_PERSIST_DIRECTORY` | `data/chroma_db` | ChromaDB storage path |
 | `EMBEDDING_MODEL_NAME` | `sentence-transformers/all-MiniLM-L6-v2` | Embedding model |
 
+### 🤖 LLM Backend — OpenAI-Compatible APIs
+
+This app uses the **OpenAI Chat Completions API** format under the hood. That means you can swap the default local LLM server with **any OpenAI-compatible API** — no code changes required, just update the environment variables.
+
+#### Default: Local LMStudio Server
+
+```bash
+LLM_BASE_URL=http://192.168.1.59:1234/v1
+LLM_MODEL=qwen/qwen3.6-35b-a3b
+```
+
+#### Alternative: Ollama
+
+```bash
+LLM_BASE_URL=http://localhost:11434/v1
+LLM_MODEL=qwen2.5:32b
+```
+
+#### Alternative: vLLM
+
+```bash
+LLM_BASE_URL=http://localhost:8000/v1
+LLM_MODEL=meta-llama/Llama-3-70b
+```
+
+#### Alternative: OpenAI API (cloud)
+
+```bash
+LLM_BASE_URL=https://api.openai.com/v1
+LLM_MODEL=gpt-4o
+# Also set: OPENAI_API_KEY=your-key-here
+```
+
+#### Alternative: Any OpenAI-Compatible Provider
+
+Drop-in replacements that support the OpenAI Chat Completions API:
+
+| Provider | Base URL Example |
+|----------|-----------------|
+| Groq | `https://api.groq.com/openai/v1` |
+| Together AI | `https://api.together.xyz/v1` |
+| Fireworks AI | `https://api.fireworks.ai/inference/v1` |
+| OpenRouter | `https://openrouter.ai/api/v1` |
+| LiteLLM Proxy | `http://localhost:4000/v1` |
+| Text Generation Inference | `http://localhost:8080/v1` |
+
+> **Note:** The model name (`LLM_MODEL`) must match a model available on your chosen backend. Check the provider's model catalog for the exact name.
+
 ---
 
 ## Usage
