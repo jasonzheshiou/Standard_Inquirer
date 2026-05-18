@@ -38,7 +38,8 @@ The Compliance Gap Analyser is a **Streamlit-based web application** that helps 
 
 ---
 
-## Architecture
+<details>
+<summary><strong>🏗️ Architecture</strong></summary>
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -61,16 +62,18 @@ The Compliance Gap Analyser is a **Streamlit-based web application** that helps 
 │  • CPS 230 rules  │     │  • Standards chunks        │
 │  • Severity maps  │     │  • Embeddings              │
 └──────────────────┘     └────────────────────────────┘
-                                   ^
-                                   │ (update)
-                          ┌────────────────────┐
-                          │ Standards Ingestion  │
-                          │ Pipeline             │
-                          │ • Download PDFs      │
-                          │ • Parse & chunk      │
-                          │ • Embed & store      │
-                          └────────────────────┘
+                                    ^
+                                    │ (update)
+                           ┌────────────────────┐
+                           │ Standards Ingestion  │
+                           │ Pipeline             │
+                           │ • Download PDFs      │
+                           │ • Parse & chunk      │
+                           │ • Embed & store      │
+                           └────────────────────┘
 ```
+
+</details>
 
 ---
 
@@ -159,7 +162,8 @@ mkdocs serve
 
 ---
 
-## Project Structure
+<details>
+<summary><strong>📂 Project Structure</strong></summary>
 
 ```
 Compliance_Gap_Analyser/
@@ -216,9 +220,12 @@ Compliance_Gap_Analyser/
 └── api/                       # Future FastAPI layer
 ```
 
+</details>
+
 ---
 
-## Questionnaire
+<details>
+<summary><strong>📋 Questionnaire</strong></summary>
 
 The questionnaire uses **free-text answers** instead of multiple choice, allowing users to provide detailed explanations of their compliance posture.
 
@@ -240,9 +247,12 @@ Free-text answers are evaluated for non-compliance indicators including:
 - Incomplete responses ("not documented", "not established", "not in place")
 - Case-insensitive matching
 
+</details>
+
 ---
 
-## Compliance Standards
+<details>
+<summary><strong>📜 Compliance Standards</strong></summary>
 
 ### Implemented
 
@@ -262,9 +272,12 @@ Free-text answers are evaluated for non-compliance indicators including:
 | AI PS 300 | Actuarial Reporting |
 | AI PS 400 | Model Governance |
 
+</details>
+
 ---
 
-## Testing
+<details>
+<summary><strong>🧪 Testing</strong></summary>
 
 ```bash
 # Run all tests
@@ -280,9 +293,12 @@ ruff check .
 mypy .
 ```
 
+</details>
+
 ---
 
-## Configuration
+<details>
+<summary><strong>⚙️ Configuration</strong></summary>
 
 All configurable settings are managed through `config.py` using `pydantic-settings`. Settings are loaded from:
 
@@ -292,9 +308,12 @@ All configurable settings are managed through `config.py` using `pydantic-settin
 
 See `.env.example` for all available configuration options.
 
+</details>
+
 ---
 
-## Documentation
+<details>
+<summary><strong>📚 Documentation</strong></summary>
 
 - **Wiki**: `python launch_wiki.py` — Auto-generated documentation site
 - **Architecture**: See `wiki_build/guides/architecture.md`
@@ -302,9 +321,12 @@ See `.env.example` for all available configuration options.
 - **Ingestion Pipeline**: See `wiki_build/ingestion/overview.md`
 - **UI Reference**: See `wiki_build/ui/overview.md`
 
+</details>
+
 ---
 
-## Development
+<details>
+<summary><strong>🔧 Development</strong></summary>
 
 ### Code Quality
 
@@ -327,6 +349,8 @@ This project uses:
 2. Add a corresponding gap rule to `data/gap_rules.json`
 3. Run `python -m scripts.seed_questionnaire` to validate
 
+</details>
+
 ---
 
 ## Disclaimer
@@ -335,10 +359,14 @@ This project uses:
 
 ---
 
-## License
+<details>
+<summary><strong>📄 License</strong></summary>
 
 This project is provided as-is for demonstration purposes. See individual files for license information.
+
+</details>
 
 ---
 
 *Built with local LLMs. No cloud dependencies required.*
+# Standard_Inquirer
