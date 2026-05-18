@@ -1,4 +1,4 @@
-# Compliance Gap Analyser
+# Standard_Inquirer
 
 > **Australian Life Insurance Model Governance Gap Analysis Tool**
 
@@ -391,4 +391,4 @@ SOFTWARE.
 ---
 
 *Built with local LLMs. No cloud dependencies required.*
-# Standard_Inquirer
+
