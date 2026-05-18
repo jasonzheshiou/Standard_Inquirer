@@ -1,0 +1,17 @@
+# Compliance Gap Analyser — Production Dependencies
+# Generated from pyproject.toml [project.dependencies]
+# Install with: pip install -r requirements.txt
+
+streamlit>=1.31.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+chromadb>=1.0.0,<2.0.0
+sentence-transformers>=2.2.0
+PyMuPDF>=1.23.0
+pdfplumber>=0.10.0
+langchain-text-splitters>=0.0.1
+requests>=2.31.0
+PyYAML>=6.0.1
+loguru>=0.7.0
+python-dotenv>=1.0.0
+openpyxl>=3.1.0
