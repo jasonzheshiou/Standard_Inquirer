@@ -37,6 +37,12 @@ Standard_Inquirer is a **Streamlit-based web application** that helps Australian
 - **LLM-powered enrichment** — Optional LLM analysis for gap explanations and mitigation suggestions
 - **Wiki documentation** — Auto-generated documentation site with search
 
+### Demo
+
+![Standard_Inquirer Demo](Animation.gif)
+
+> 📝 **Note:** All questions and answers shown in the demo were generated randomly by AI for demonstration purposes.
+
 ---
 
 ## Installation
@@ -174,21 +180,6 @@ mkdocs serve
 
 ---
 
-## Demo
-
-<details>
-<summary><strong>▶️ Watch the App in Action</strong></summary>
-
-Below is a recording of the Standard_Inquirer chat-based assessment in action:
-
-![Standard_Inquirer Demo](Animation.gif)
-
-> 📝 **Note:** All questions and answers shown in the demo were generated randomly by AI for demonstration purposes.
-
-</details>
-
----
-
 <details>
 <summary><strong>🏗️ Architecture</strong></summary>
 
@@ -235,28 +226,26 @@ Below is a recording of the Standard_Inquirer chat-based assessment in action:
 
 ### AI-Driven Assessment
 
-The Assessment page replaces traditional form-based questionnaires with a conversational interface:
+The Assessment page is a conversational chat interface — there are no forms to fill out. The experience works like this:
 
-1. **Introduction** — The AI consultant introduces itself and asks about your organisation type (life insurer, reinsurer, friendly society, superannuation fund, or other) and compliance focus area
-2. **Adaptive questioning** — The AI asks one question at a time, adapting follow-ups based on your answers and retrieving relevant standards from ChromaDB for context
-3. **Completion** — The AI signals when it has enough information (or after 30 turns maximum), then extracts structured data from the conversation
-4. **Answer extraction** — A three-phase pipeline captures your responses:
-   - **Phase 1**: LLM-based answer extraction mapped to generated questionnaire IDs
-   - **Phase 2**: Conversation-based fallback matching consultant questions to user responses
-   - **Phase 3**: Truly unanswered questions marked as "Not answered"
+1. **Greeting** — The AI consultant introduces itself and asks about your organisation type (life insurer, reinsurer, friendly society, superannuation fund, or other) and what compliance area you'd like to focus on
+2. **Adaptive conversation** — Based on your responses, the AI asks targeted follow-up questions one at a time, referencing specific APRA standards and clauses relevant to your context (e.g. CPS 510 for governance, CPS 230 for operational risk, Privacy Act for data privacy). The AI adapts its line of questioning based on your answers — if you mention you have a framework, it digs deeper into controls; if you say you don't, it acknowledges that and moves on
+3. **Warm, professional tone** — The AI uses a professional yet approachable tone, acknowledging your answers before moving on, and never being judgmental about gaps in compliance
+4. **Completion** — The AI signals when it has enough information to produce a review (or after 30 turns maximum). You can also end the assessment at any time by clicking **"I'm Done — Generate My Report"** in the sidebar, or start over with **"Start Over"**
+5. **Data extraction** — The conversation is analysed to extract structured questionnaire data and your answers, which feed into the compliance review report
 
 ### Compliance Review
 
 After the assessment, the Compliance Review page displays:
 
 - **Severity-ranked findings** — High, medium, and low severity gaps mapped to specific standard clauses
-- **Gap conditions** — What's missing or non-compliant
+- **Gap conditions** — What's missing or non-compliant based on your responses
 - **Mitigation suggestions** — Actionable steps to close each gap
 - **Standard references** — Direct links to the relevant APRA standard
 
 ### Static Questionnaire (Fallback)
 
-The legacy form-based questionnaire is still available for organisations that prefer structured forms over conversation. It covers the same standards and rules as the AI assessment.
+The legacy form-based questionnaire is still available for organisations that prefer structured forms over conversation. It covers CPS 230 with 8 questions across 4 sections (Board Oversight, Model Inventory & Validation, Data Governance, Risk Escalation & Reporting).
 
 </details>
 
