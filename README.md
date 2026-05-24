@@ -174,7 +174,23 @@ mkdocs serve
 
 ---
 
-## Architecture
+## Demo
+
+<details>
+<summary><strong>▶️ Watch the App in Action</strong></summary>
+
+Below is a recording of the Standard_Inquirer chat-based assessment in action:
+
+![Standard_Inquirer Demo](Animation.gif)
+
+> 📝 **Note:** All questions and answers shown in the demo were generated randomly by AI for demonstration purposes.
+
+</details>
+
+---
+
+<details>
+<summary><strong>🏗️ Architecture</strong></summary>
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -199,20 +215,23 @@ mkdocs serve
 │  • LLM enrichment  │     │  • Actuarial standards     │
 │  • Severity ranking│     │  • Embeddings              │
 └──────────────────┘     └────────────────────────────┘
-                                     ^
-                                     │ (update)
-                            ┌────────────────────┐
-                            │ Standards Ingestion  │
-                            │ Pipeline             │
-                            │ • Download PDFs/HTML │
-                            │ • Parse & chunk      │
-                            │ • Embed & store      │
-                            └────────────────────┘
+                                      ^
+                                      │ (update)
+                             ┌────────────────────┐
+                             │ Standards Ingestion  │
+                             │ Pipeline             │
+                             │ • Download PDFs/HTML │
+                             │ • Parse & chunk      │
+                             │ • Embed & store      │
+                             └────────────────────┘
 ```
+
+</details>
 
 ---
 
-## How It Works
+<details>
+<summary><strong>📖 How It Works</strong></summary>
 
 ### AI-Driven Assessment
 
@@ -239,9 +258,12 @@ After the assessment, the Compliance Review page displays:
 
 The legacy form-based questionnaire is still available for organisations that prefer structured forms over conversation. It covers the same standards and rules as the AI assessment.
 
+</details>
+
 ---
 
-## Compliance Standards
+<details>
+<summary><strong>📜 Compliance Standards</strong></summary>
 
 ### Supported Standards (via Vector Knowledge Base)
 
@@ -274,9 +296,12 @@ The gap analysis engine currently has **8 deterministic rules** implemented for 
 
 > **More standards and rules are being added.** The vector knowledge base supports all 40+ indexed standards — gap rules for additional standards are planned.
 
+</details>
+
 ---
 
-## Project Structure
+<details>
+<summary><strong>📂 Project Structure</strong></summary>
 
 ```
 Compliance_Gap_Analyser/
@@ -333,7 +358,12 @@ Compliance_Gap_Analyser/
 └── api/                       # Future FastAPI layer
 ```
 
-## 🧪 Testing
+</details>
+
+---
+
+<details>
+<summary><strong>🧪 Testing</strong></summary>
 
 ```bash
 # Run all tests
@@ -349,9 +379,12 @@ ruff check .
 mypy .
 ```
 
+</details>
+
 ---
 
-## ⚙️ Configuration
+<details>
+<summary><strong>⚙️ Configuration</strong></summary>
 
 All configurable settings are managed through `config.py` using `pydantic-settings`. Settings are loaded from:
 
@@ -361,9 +394,12 @@ All configurable settings are managed through `config.py` using `pydantic-settin
 
 See `.env.example` for all available configuration options.
 
+</details>
+
 ---
 
-## 📚 Documentation
+<details>
+<summary><strong>📚 Documentation</strong></summary>
 
 - **Wiki**: `python launch_wiki.py` — Auto-generated documentation site
 - **Architecture**: See `wiki_build/guides/architecture.md`
@@ -371,9 +407,12 @@ See `.env.example` for all available configuration options.
 - **Ingestion Pipeline**: See `wiki_build/ingestion/overview.md`
 - **UI Reference**: See `wiki_build/ui/overview.md`
 
+</details>
+
 ---
 
-## 🔧 Development
+<details>
+<summary><strong>🔧 Development</strong></summary>
 
 ### Code Quality
 
@@ -395,6 +434,8 @@ This project uses:
 1. Add the question to `data/questionnaire.json` with `type: "text"`
 2. Add a corresponding gap rule to `data/gap_rules.json`
 3. Run `python -m scripts.seed_questionnaire` to validate
+
+</details>
 
 ---
 
