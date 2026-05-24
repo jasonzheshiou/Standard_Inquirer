@@ -39,7 +39,7 @@ Standard_Inquirer is a **Streamlit-based web application** that helps Australian
 
 ### Demo
 
-![Standard_Inquirer Demo](Animation.gif)
+![Standard_Inquirer Demo](https://raw.githubusercontent.com/jasonzheshiou/Standard_Inquirer/main/Animation.gif)
 
 > 📝 **Note:** All questions and answers shown in the demo were generated randomly by AI for demonstration purposes.
 
