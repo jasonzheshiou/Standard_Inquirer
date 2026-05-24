@@ -1,11 +1,12 @@
 """Streamlit entry point for the Compliance Gap Analyser.
 
-Routes between five pages:
-    - Intake — organisation type selector and questionnaire generation
+Routes between six pages:
+    - Assessment — AI-driven conversational compliance assessment
     - Home — introduction and session management
-    - Questionnaire — CPS 230 governance questions
-    - Gap Report — severity-ranked findings
+    - Questionnaire — legacy form-based questionnaire (fallback)
+    - Compliance Review — severity-ranked findings
     - Admin — standards ingestion controls
+    - Standards — manage built-in and custom compliance standards
 
 Page navigation is managed via ``st.session_state.current_page``.
 The admin page is accessible via sidebar toggle or the URL parameter
@@ -40,7 +41,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 st.set_page_config(
-    page_title="Compliance Gap Analyser",
+    page_title="Standard_Inquirer",
     page_icon="📊",
     layout="wide",
 )
@@ -52,7 +53,7 @@ st.set_page_config(
 if "current_page" not in st.session_state and "page" in st.query_params:
     st.session_state.current_page = st.query_params["page"]
 if "current_page" not in st.session_state:
-    st.session_state.current_page = "intake"
+    st.session_state.current_page = "assessment"
 if "answers" not in st.session_state:
     st.session_state.answers = {}
 
@@ -63,12 +64,12 @@ if "answers" not in st.session_state:
 with st.sidebar:
     st.title("Navigation")
 
-    _pages = ["Intake", "Home", "Questionnaire", "Gap Report", "Admin", "Standards"]
+    _pages = ["Assessment", "Home", "Compliance Review", "Questionnaire", "Admin", "Standards"]
     _page_map = {
-        "Intake": "intake",
+        "Assessment": "assessment",
         "Home": "home",
+        "Compliance Review": "report",
         "Questionnaire": "questionnaire",
-        "Gap Report": "report",
         "Admin": "admin",
         "Standards": "standards",
     }
@@ -90,7 +91,7 @@ with st.sidebar:
     st.session_state.current_page = _page_map[page]
 
     st.divider()
-    st.caption("Compliance Gap Analyser v0.1.0")
+    st.caption("Standard_Inquirer v0.1.0")
 
 # ---------------------------------------------------------------------------
 # Resource initialization
@@ -124,7 +125,12 @@ def _load_gap_rules():
 # ---------------------------------------------------------------------------
 
 try:
-    if st.session_state.current_page == "intake":
+    if st.session_state.current_page == "assessment":
+        from ui.chat_ui import render_assessment
+
+        render_assessment()
+
+    elif st.session_state.current_page == "intake":
         from ui.questionnaire_intake import render_intake
 
         render_intake()

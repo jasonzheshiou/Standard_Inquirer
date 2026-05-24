@@ -1,12 +1,12 @@
 # Standard_Inquirer
 
-> **Australian Life Insurance Model Governance Gap Analysis Tool**
+> **AI-Driven Compliance Assessment for Australian Financial Services**
 
 ⚠️ **In Development — Expect Bugs & Inconsistencies**
 
-This project is actively under development. You may encounter bugs, inconsistent methodologies, or incomplete features. Breaking changes between versions are possible. Statistical methods are still being refined.
+This project is actively under development. You may encounter bugs, inconsistent methodologies, or incomplete features. Breaking changes between versions are possible.
 
-**This is intentional** — the project demonstrates what can be built using local LLMs.
+**This is intentional** — the project demonstrates what can be built using local LLMs for regulatory compliance work.
 
 ---
 
@@ -14,7 +14,7 @@ This project is actively under development. You may encounter bugs, inconsistent
 
 **This entire application was developed using the local LLM `Qwen3.6-35B-A3B`.**
 
-The purpose of this project is to demonstrate that a **full-featured Compliance Gap Analysis Application** can be built entirely with:
+The purpose of this project is to demonstrate that a **full-featured Compliance Assessment Application** can be built entirely with:
 
 - **Local LLM**: Qwen3.6-35B-A3B (no API keys, no cloud dependency)
 - **Open-source tools**: Streamlit, Plotly, pandas, pytest
@@ -24,56 +24,18 @@ The purpose of this project is to demonstrate that a **full-featured Compliance 
 
 ## Overview
 
-The Compliance Gap Analyser is a **Streamlit-based web application** that helps Australian life insurance organisations assess their compliance with prudential standards (primarily APRA CPS 230 on Operational Risk Management).
+Standard_Inquirer is a **Streamlit-based web application** that helps Australian financial services organisations assess their compliance with APRA prudential standards. Instead of filling out static forms, users have a natural conversation with an AI consultant that adapts to their organisation type and compliance focus.
 
 ### Key Features
 
-- **Free-text questionnaire** — Answer compliance questions with detailed explanations rather than simple Yes/No responses
-- **Gap analysis engine** — Evaluates answers against APRA CPS 230 rules with severity-ranked findings
-- **Vector knowledge base** — ChromaDB stores embedded regulatory standards for evidence retrieval
-- **Standards ingestion pipeline** — Automatically downloads, parses, and indexes regulatory documents
+- **AI-driven chat assessment** — A conversational interface where an AI consultant asks adaptive questions based on your organisation type and compliance focus area
+- **Multi-standard coverage** — Supports 40+ APRA prudential standards (CPS, LPS, LRS, CPG, LPG, and Actuarial Standards) via vector knowledge base retrieval
+- **Smart answer extraction** — Three-phase extraction pipeline (LLM → conversation-based fallback → manual) ensures user responses are captured reliably
+- **Compliance review reports** — Severity-ranked findings with gap conditions mapped to specific standard clauses
+- **Vector knowledge base** — ChromaDB stores embedded regulatory standards for evidence retrieval and context-aware questioning
+- **Standards ingestion pipeline** — Automatically downloads, parses, and indexes regulatory documents from APRA and Actuaries Institute
 - **LLM-powered enrichment** — Optional LLM analysis for gap explanations and mitigation suggestions
-- **Interactive gap reports** — Severity-sorted findings with expandable details and CSV/JSON export
 - **Wiki documentation** — Auto-generated documentation site with search
-
----
-
-<details>
-<summary><strong>🏗️ Architecture</strong></summary>
-
-```
-┌─────────────────────────────────────────────────────┐
-│                  Streamlit UI                        │
-│  Intake │ Home │ Questionnaire │ Report │ Admin     │
-└──────────────────┬──────────────────────────────────┘
-                   │
-                   v
-┌─────────────────────────────────────────────────────┐
-│            Gap Analysis Engine                       │
-│  • Rule evaluation (deterministic)                   │
-│  • LLM-powered gap analysis (optional)              │
-│  • ChromaDB evidence retrieval                      │
-└──────────┬───────────────────────┬──────────────────┘
-           │                       │
-           v                       v
-┌──────────────────┐     ┌────────────────────────────┐
-│  Structured Rules │     │  Vector Knowledge Base     │
-│  (gap_rules.json) │     │  (ChromaDB)                │
-│  • CPS 230 rules  │     │  • Standards chunks        │
-│  • Severity maps  │     │  • Embeddings              │
-└──────────────────┘     └────────────────────────────┘
-                                    ^
-                                    │ (update)
-                           ┌────────────────────┐
-                           │ Standards Ingestion  │
-                           │ Pipeline             │
-                           │ • Download PDFs      │
-                           │ • Parse & chunk      │
-                           │ • Embed & store      │
-                           └────────────────────┘
-```
-
-</details>
 
 ---
 
@@ -176,10 +138,10 @@ The app opens at `http://localhost:8501` with six pages:
 
 | Page | Purpose |
 |------|---------|
-| **Intake** | Select organisation type and compliance focus area |
+| **Assessment** | AI-driven conversational compliance assessment — chat with the AI consultant |
 | **Home** | Introduction, LLM status, recent assessments |
-| **Questionnaire** | Answer compliance questions (free text) |
-| **Gap Report** | View severity-ranked compliance findings |
+| **Compliance Review** | View severity-ranked compliance findings |
+| **Questionnaire** | Legacy form-based questionnaire (fallback for static assessment) |
 | **Admin** | Standards ingestion controls and ChromaDB status |
 | **Standards** | Manage built-in and custom compliance standards |
 
@@ -212,8 +174,109 @@ mkdocs serve
 
 ---
 
-<details>
-<summary><strong>📂 Project Structure</strong></summary>
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────┐
+│                  Streamlit UI                        │
+│  Assessment │ Home │ Compliance Review │ Questionnaire │ Admin │ Standards
+└─────────────────────────────────────────────────────┘
+                    │
+                    v
+┌─────────────────────────────────────────────────────┐
+│         AI Conversation Engine (ChatConductor)       │
+│  • Standards retrieval from ChromaDB                │
+│  • Multi-turn LLM conversation                      │
+│  • Smart answer extraction (3-phase pipeline)       │
+│  • Structured questionnaire generation              │
+└──────────┬───────────────────────┬──────────────────┘
+           │                       │
+           v                       v
+┌──────────────────┐     ┌────────────────────────────┐
+│  Gap Analysis     │     │  Vector Knowledge Base     │
+│  Engine           │     │  (ChromaDB)                │
+│  • Rule evaluation │     │  • 40+ APRA standards      │
+│  • LLM enrichment  │     │  • Actuarial standards     │
+│  • Severity ranking│     │  • Embeddings              │
+└──────────────────┘     └────────────────────────────┘
+                                     ^
+                                     │ (update)
+                            ┌────────────────────┐
+                            │ Standards Ingestion  │
+                            │ Pipeline             │
+                            │ • Download PDFs/HTML │
+                            │ • Parse & chunk      │
+                            │ • Embed & store      │
+                            └────────────────────┘
+```
+
+---
+
+## How It Works
+
+### AI-Driven Assessment
+
+The Assessment page replaces traditional form-based questionnaires with a conversational interface:
+
+1. **Introduction** — The AI consultant introduces itself and asks about your organisation type (life insurer, reinsurer, friendly society, superannuation fund, or other) and compliance focus area
+2. **Adaptive questioning** — The AI asks one question at a time, adapting follow-ups based on your answers and retrieving relevant standards from ChromaDB for context
+3. **Completion** — The AI signals when it has enough information (or after 30 turns maximum), then extracts structured data from the conversation
+4. **Answer extraction** — A three-phase pipeline captures your responses:
+   - **Phase 1**: LLM-based answer extraction mapped to generated questionnaire IDs
+   - **Phase 2**: Conversation-based fallback matching consultant questions to user responses
+   - **Phase 3**: Truly unanswered questions marked as "Not answered"
+
+### Compliance Review
+
+After the assessment, the Compliance Review page displays:
+
+- **Severity-ranked findings** — High, medium, and low severity gaps mapped to specific standard clauses
+- **Gap conditions** — What's missing or non-compliant
+- **Mitigation suggestions** — Actionable steps to close each gap
+- **Standard references** — Direct links to the relevant APRA standard
+
+### Static Questionnaire (Fallback)
+
+The legacy form-based questionnaire is still available for organisations that prefer structured forms over conversation. It covers the same standards and rules as the AI assessment.
+
+---
+
+## Compliance Standards
+
+### Supported Standards (via Vector Knowledge Base)
+
+The application indexes **40+ regulatory standards** from APRA and the Actuaries Institute, including:
+
+| Category | Standards |
+|----------|-----------|
+| **APRA CPS** | CPS 001, CPS 190, CPS 220, CPS 226, CPS 230, CPS 234, CPS 320, CPS 510, CPS 511, CPS 520, CPS 900 |
+| **APRA LPS** | LPS 100, LPS 110, LPS 112, LPS 114, LPS 115, LPS 117, LPS 118, LPS 200, LPS 230, LPS 340, LPS 360, LPS 370, LPS 600, LPS 700 |
+| **APRA LRS** | LRS 001, LRS 110.0, LRS 111.0, LRS 112.0, LRS 112.3, LRS 114.0, LRS 114.2, LRS 114.3, LRS 115.0, LRS 117.0, LRS 118.0, LRS 200.0, LRS 300.0, LRS 310.0, LRS 311.0, LRS 340.0, LRS 750 |
+| **APRA CPG** | CPG 110, CPG 190, CPG 220, CPG 230, CPG 234, CPG 320, CPG 900 |
+| **APRA LPG** | LPG 230, LPG 240, LPG 250, LPG 260, LPG 270, LPG 520, LPG 700 |
+| **Actuarial** | PS 1, PS 102, PS 103, PS 201, PS 202, PG 1, PG 4, PG 5, PG 6A, PG 6B, PG 101, PG 199.02, PG 199.03 |
+| **Accounting** | AASB 17, IFRS 17 |
+
+### Implemented Gap Rules
+
+The gap analysis engine currently has **8 deterministic rules** implemented for **CPS 230 (Operational Risk Management)** covering:
+
+| Clause | Requirement | Severity |
+|--------|-------------|----------|
+| CPS 230 ¶27(b) | Board-approved risk appetite statement covering model risk | High |
+| CPS 230 ¶6 | Documented model risk governance framework | High |
+| CPS 230 ¶21 | Comprehensive model inventory | Medium |
+| CPS 230 ¶22 | Independent model validation | High |
+| CPS 230 ¶27 | Data governance framework for model inputs/outputs | Medium |
+| CPS 230 ¶28 | Model documentation standards | Medium |
+| CPS 230 ¶30 | Model issue escalation process | High |
+| CPS 230 ¶29 | Concentration risk in model inputs/outputs | Medium |
+
+> **More standards and rules are being added.** The vector knowledge base supports all 40+ indexed standards — gap rules for additional standards are planned.
+
+---
+
+## Project Structure
 
 ```
 Compliance_Gap_Analyser/
@@ -232,23 +295,23 @@ Compliance_Gap_Analyser/
 │   └── questionnaire.py       # Questionnaire loading/validation
 │
 ├── llm/                       # LLM integration
-│   ├── client.py              # LMStudio API client
+│   ├── client.py              # OpenAI-compatible API client
+│   ├── chat_conductor.py      # AI conversation engine
 │   ├── question_generator.py  # LLM questionnaire generation
-│   ├── answer_analyzer.py     # LLM gap finding enrichment
 │   └── session.py             # Session persistence
 │
 ├── standards_ingestion/       # Standards processing pipeline
 │   ├── downloader.py          # PDF/HTML download with caching
 │   ├── parser.py              # Text extraction & chunking
 │   ├── embedder.py            # Embedding + ChromaDB upsert
-│   ├── sources.yaml           # Standards catalog
+│   ├── sources.yaml           # Standards catalog (40+ standards)
 │   └── custom_loader.py       # Custom standards from YAML
 │
 ├── ui/                        # Streamlit pages
 │   ├── home.py                # Home/introduction page
-│   ├── questionnaire_intake.py  # Organisation type + focus input
-│   ├── questionnaire_ui.py    # Questionnaire rendering
-│   ├── report_ui.py           # Gap report display
+│   ├── chat_ui.py             # AI chat-based assessment page
+│   ├── questionnaire_ui.py    # Legacy form-based questionnaire
+│   ├── report_ui.py           # Compliance review report display
 │   ├── admin.py               # Admin panel
 │   └── standards_manager.py   # Standards CRUD
 │
@@ -270,64 +333,7 @@ Compliance_Gap_Analyser/
 └── api/                       # Future FastAPI layer
 ```
 
-</details>
-
----
-
-<details>
-<summary><strong>📋 Questionnaire</strong></summary>
-
-The questionnaire uses **free-text answers** instead of multiple choice, allowing users to provide detailed explanations of their compliance posture.
-
-### Current Coverage
-
-| Section | Questions |
-|---------|-----------|
-| Board & Senior Management Oversight | 2 |
-| Model Inventory & Validation | 2 |
-| Data Governance | 2 |
-| Risk Escalation & Reporting | 2 |
-
-### Gap Detection Logic
-
-Free-text answers are evaluated for non-compliance indicators including:
-
-- Empty responses (no answer provided)
-- Negative responses ("no", "n/a", "not applicable")
-- Incomplete responses ("not documented", "not established", "not in place")
-- Case-insensitive matching
-
-</details>
-
----
-
-<details>
-<summary><strong>📜 Compliance Standards</strong></summary>
-
-### Implemented
-
-| Standard | Category | Rules | Status |
-|----------|----------|-------|--------|
-| APRA CPS 230 | Operational Risk | 8 | ✅ Implemented |
-
-### Planned
-
-| Standard | Category |
-|----------|----------|
-| APRA CPS 220 | Risk Management |
-| APRA CPS 510 | Governance |
-| APRA LPS 110 | Capital Adequacy |
-| APRA LPS 220 | Risk Management (Life) |
-| AI PS 200 | Life Insurance Valuation |
-| AI PS 300 | Actuarial Reporting |
-| AI PS 400 | Model Governance |
-
-</details>
-
----
-
-<details>
-<summary><strong>🧪 Testing</strong></summary>
+## 🧪 Testing
 
 ```bash
 # Run all tests
@@ -343,12 +349,9 @@ ruff check .
 mypy .
 ```
 
-</details>
-
 ---
 
-<details>
-<summary><strong>⚙️ Configuration</strong></summary>
+## ⚙️ Configuration
 
 All configurable settings are managed through `config.py` using `pydantic-settings`. Settings are loaded from:
 
@@ -358,12 +361,9 @@ All configurable settings are managed through `config.py` using `pydantic-settin
 
 See `.env.example` for all available configuration options.
 
-</details>
-
 ---
 
-<details>
-<summary><strong>📚 Documentation</strong></summary>
+## 📚 Documentation
 
 - **Wiki**: `python launch_wiki.py` — Auto-generated documentation site
 - **Architecture**: See `wiki_build/guides/architecture.md`
@@ -371,12 +371,9 @@ See `.env.example` for all available configuration options.
 - **Ingestion Pipeline**: See `wiki_build/ingestion/overview.md`
 - **UI Reference**: See `wiki_build/ui/overview.md`
 
-</details>
-
 ---
 
-<details>
-<summary><strong>🔧 Development</strong></summary>
+## 🔧 Development
 
 ### Code Quality
 
@@ -399,22 +396,19 @@ This project uses:
 2. Add a corresponding gap rule to `data/gap_rules.json`
 3. Run `python -m scripts.seed_questionnaire` to validate
 
-</details>
-
 ---
 
 ## Disclaimer
 
-> ⚠️ **This tool provides sample guidance only.** All rules, mitigations, and gap conditions must be reviewed by a **qualified actuary** before being relied upon for regulatory compliance. The automated analysis is not a substitute for professional regulatory advice.
+> ⚠️ **This tool provides sample guidance only.** All rules, mitigations, and gap conditions must be reviewed by a **qualified professional** before being relied upon for regulatory compliance. The automated analysis is not a substitute for professional regulatory advice.
 
 ---
 
-<details>
-<summary><strong>📄 License</strong></summary>
+## License
 
 **MIT License**
 
-Copyright (c) 2026 Compliance Gap Analyser
+Copyright (c) 2026 Standard_Inquirer
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -434,9 +428,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-</details>
-
 ---
 
 *Built with local LLMs. No cloud dependencies required.*
-

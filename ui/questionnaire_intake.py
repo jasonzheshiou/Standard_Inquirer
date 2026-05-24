@@ -257,7 +257,7 @@ def render_intake() -> None:
     """
     _ensure_session_state()
 
-    st.title("New Compliance Assessment")
+    st.title("Standard_Inquirer")
 
     st.markdown(
         "Answer a few quick questions and the LLM will generate a "

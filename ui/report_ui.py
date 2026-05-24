@@ -188,7 +188,7 @@ def render_report() -> None:
 
     If no answers exist, shows a prompt to complete the questionnaire first.
     """
-    st.title("Gap Analysis Report")
+    st.title("Compliance Review")
 
     answers = st.session_state.get("answers", {})
 

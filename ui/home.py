@@ -38,12 +38,12 @@ def _render_llm_status() -> None:
     available = _is_llm_available()
     if available:
         st.success(
-            "\U0001f916 **LLM Connected** — AI-powered questionnaire generation is enabled."
+            "\U0001f916 **LLM Connected** — AI-powered compliance assessment is enabled."
         )
     else:
         st.warning(
             "\U0001f50c **LLM Unavailable** — AI-powered features are currently "
-            "unreachable. You can still use the default CPS 230 questionnaire."
+            "unreachable. You can still use the legacy questionnaire."
         )
 
 
@@ -53,20 +53,20 @@ def _render_action_buttons() -> None:
 
     with col1:
         if st.button(
-            "\U0001f916 Start LLM-Powered Assessment",
+            "\U0001f916 Start AI Assessment",
             type="primary",
             use_container_width=True,
             disabled=not _is_llm_available(),
         ):
-            st.session_state.current_page = "intake"
-            st.session_state.intake_org_type = "life_insurer"
-            st.session_state.generated_questionnaire = None
+            st.session_state.current_page = "assessment"
+            st.session_state.chat_state = "intake"
             st.session_state.answers = {}
+            st.session_state.generated_questionnaire = None
             st.rerun()
 
     with col2:
         if st.button(
-            "\u2699\ufe0f  Use Default CPS 230 Questionnaire",
+            "\u2699\ufe0f  Use Legacy Questionnaire",
             use_container_width=True,
             type="secondary",
         ):
@@ -82,19 +82,27 @@ def _render_whats_new() -> None:
     with st.expander("\u2728 What's New in This Version", expanded=False):
         st.markdown(
             """
-            This release adds **AI-powered compliance assessment** features:
+            This release adds **AI-powered conversational compliance assessment**:
 
-            - **Free-text questionnaire generation** — Describe your compliance
-              focus area and the LLM will generate a tailored questionnaire
-              covering all relevant Australian Life Insurance Actuarial standards.
+            - **Chat-based assessment** — Have a natural conversation with our
+              AI compliance consultant who asks targeted questions one at a time,
+              adapting based on your answers.
 
-            - **Comprehensive standards coverage** — The LLM draws from a
+            - **Warm and professional guidance** — The AI consultant acknowledges
+              your responses, explains why questions matter, and keeps the
+              conversation encouraging and approachable.
+
+            - **Intelligent follow-ups** — The AI adapts its questions based on
+              your responses, exploring gaps further when needed and moving on
+              when compliance is confirmed.
+
+            - **Comprehensive standards coverage** — The AI draws from a
               knowledge base spanning CPS, LPS, LRS, AASB, and other
               regulatory frameworks.
 
-            - **LLM-enriched gap findings** — After answering the questionnaire,
-              each gap finding can be enriched with AI-generated explanations
-              and suggested mitigations for faster analysis.
+            - **LLM-enriched findings** — After the assessment, each finding
+              can be enriched with AI-generated explanations and suggested
+              mitigations for faster analysis.
 
             > **Note:** The LLM provides sample guidance only. All rules and
             > mitigations must be reviewed by a qualified actuary before
@@ -223,17 +231,18 @@ def render_home() -> None:
     "What's New" section explaining AI features, a list of recent
     assessments, and a legacy session loader.
     """
-    st.title("Life Insurance Compliance Gap Analyser")
+    st.title("Standard_Inquirer")
 
     st.markdown(
         """
-        This tool guides you through a **CPS 230** governance questionnaire
-        and produces a gap analysis report identifying compliance deficiencies
-        against regulatory requirements.
+        This tool guides you through an **AI-powered conversational assessment**
+        of your compliance posture and produces a compliance review report
+        identifying areas that may need attention against regulatory requirements.
 
         ### How it works
-        1. **Answer** each questionnaire section (boolean, multiple-choice, and text questions).
-        2. **Review** the gap analysis report with severity-ranked findings.
+        1. **Chat** with our AI compliance consultant who asks targeted questions
+           one at a time, adapting based on your answers.
+        2. **Review** the compliance report with severity-ranked findings.
         3. **Export** findings as CSV for further analysis.
         """
     )
@@ -264,6 +273,6 @@ def render_home() -> None:
     st.warning(
         "\u26a0\ufe0f **Disclaimer:** This tool provides sample guidance only. "
         "LLM-generated content is AI-assisted and may contain inaccuracies. "
-        "All rules, mitigations, and gap findings must be reviewed by a "
+        "All rules, mitigations, and compliance findings must be reviewed by a "
         "qualified actuary before being relied upon for regulatory compliance."
     )
